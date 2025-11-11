@@ -19,7 +19,6 @@ const GameButton = ({ title, onClick }) => {
 const StyledWrapper = styled.div`
   .input-wrapper {
     position: relative;
-    width: 250px;
     background-color: #f9fafb;
     border-radius: 10px;
     overflow: hidden;
@@ -37,7 +36,7 @@ const StyledWrapper = styled.div`
     height: 48px;
     background-color: #8b5cf6;
     border-radius: 50%;
-    filter: blur(10px);
+    filter: blur(20px);
     box-shadow: -200px 45px 30px 45px #f9b0b9a1, 55px 45px 190px 120px #8b5cf6;
   }
 
@@ -50,16 +49,14 @@ const StyledWrapper = styled.div`
   }
 
   .game-button {
-    border: none;
     background: no-repeat;
     cursor: pointer;
-    transition: all 0.3s ease;
     letter-spacing: 2px;
     font-size: 14px;
     text-transform: uppercase;
 
     width: 100%;
-    padding: 10px 40px 10px 12px;
+    padding: 10px;
     border: 1px solid #a3a3a3;
     border-radius: 8px;
     font-weight: 600;

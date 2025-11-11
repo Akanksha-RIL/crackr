@@ -44,16 +44,15 @@ const StyledWrapper = styled.div`
   }
 
   .card-content .card-title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 22px;
+    font-weight: 600;
     color: inherit;
     text-transform: uppercase;
   }
 
   .card-content .card-para {
     color: inherit;
-    opacity: 0.8;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .card:hover {

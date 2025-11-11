@@ -46,15 +46,15 @@ const StyledWrapper = styled.div`
   /*works janky on mobile :<*/
   .container {
     position: relative;
-    width: 420px;
+    width: 220px;
+    max-width: 100vw;
     height: 75px;
     transition: 200ms;
     margin: 0px 10px 30px 10px;
   }
 
   .container:active {
-    width: 180px;
-    height: 245px;
+    width: 90vw;
   }
 
   #card {
@@ -109,10 +109,6 @@ const StyledWrapper = styled.div`
     height: 100%;
   }
 
-  .tracker:hover {
-    cursor: pointer;
-  }
-
   .tracker:hover ~ #card #prompt {
     opacity: 0;
   }
@@ -147,7 +143,7 @@ const StyledWrapper = styled.div`
   #card::before {
     content: '';
     background: linear-gradient(43deg, rgb(65, 88, 208) 0%, rgb(200, 80, 192) 46%, rgb(255, 204, 112) 100%);
-    filter: blur(2rem);
+    filter: blur(10px);
     opacity: 30%;
     width: 100%;
     height: 100%;

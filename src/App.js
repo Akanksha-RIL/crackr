@@ -71,7 +71,7 @@ export default function App() {
       correctDigits,
       correctPositions,
     };
-    setHistory((prev) => [...prev, entry]);
+    setHistory((prev) => [entry, ...prev]);
 
     if (guess === targetNumber) {
       setMessage(`🎉 You got it right! The number was ${targetNumber}!`);
@@ -84,43 +84,8 @@ export default function App() {
 
   return (
     <div className="game-container">
-      <TitleCard title={"Crack+Number"} subtitle={`Crack the mystery number!`} promptLabel={"Crackr"}/>
-
-      {!gameStarted ? (
-        gameRestart ? (
-          <GameButton title="Play Again" onClick={() => {
-            setGameRestart(false);
-            setMessage("");
-            setDigitCount("");
-            setHistory([]);
-          }} />
-        ) : (
-          <div className="game-start-section">
-            <DigitInput
-              value={digitCount}
-              onChange={setDigitCount}
-              placeholder="Enter number of digits"
-            />
-            <GameButton title="Start Game" onClick={startGame} />
-          </div>
-        )
-      ) : (
-        <div className="game-section">
-          <div className="game-banner"><p>Guess the {digitCount}-digit number!</p></div>
-            <div className="game-check-section">
-            <DigitInput
-              value={guess}
-              onChange={setGuess}
-              placeholder="Enter your guess"
-              maxDigits={digitCount}
-            />
-            <GameButton title={"Check Guess"} onClick={checkGuess} />
-            </div>
-        </div>
-      )}
-
-      {message && <p className="game-banner">{message}</p>}
-
+      <div className="title-card-container"><TitleCard title={"Crack+Number"} subtitle={`Crack the mystery number!`} promptLabel={"Crackr"}/></div>
+      
       {history.length > 0 && (
         <div className="guess-history-container">
           <h2 className="game-banner">Previous Guesses</h2>
@@ -138,6 +103,44 @@ export default function App() {
           ))}
         </div>
       )}
+
+      {!gameStarted ? (
+        gameRestart ? (
+          <GameButton title="Play Again" onClick={() => {
+            setGameRestart(false);
+            setMessage("");
+            setDigitCount("");
+            setHistory([]);
+          }} />
+        ) : (
+          <div className="game-start-section">
+            <DigitInput
+              value={digitCount}
+              onChange={setDigitCount}
+              onEnter={startGame}
+              placeholder="Enter number of digits"
+            />
+            <GameButton title="Start Game" onClick={startGame} />
+          </div>
+        )
+      ) : (
+        <div className="game-section">
+          <div className="game-banner"><p>Guess the {digitCount}-digit number!</p></div>
+            <div className="game-check-section">
+            <DigitInput
+              value={guess}
+              onChange={setGuess}
+              onEnter={checkGuess}
+              placeholder="Enter your guess"
+              maxDigits={digitCount}
+            />
+            <GameButton title={"Check Guess"} onClick={checkGuess} />
+            </div>
+        </div>
+      )}
+
+      {message && <p className="game-banner">{message}</p>}
+
     </div>
   );
 }
