@@ -84,7 +84,7 @@ export default function App() {
 
   return (
     <div className="game-container">
-      <TitleCard title={"Numdle"} subtitle={`It's Wordle… but for numbers!`} promptLabel={"A Number Guessing Game"}/>
+      <TitleCard title={"Crackr"} subtitle={`Crack the mystery number!`} promptLabel={"Crack+Number"}/>
 
       {!gameStarted ? (
         gameRestart ? (
