@@ -106,12 +106,15 @@ export default function App() {
 
       {!gameStarted ? (
         gameRestart ? (
-          <GameButton title="Play Again" onClick={() => {
-            setGameRestart(false);
-            setMessage("");
-            setDigitCount("");
-            setHistory([]);
-          }} />
+          <div className="game-section">
+            <p className="game-banner">{message}</p>
+            <GameButton title="Play Again" onClick={() => {
+              setGameRestart(false);
+              setMessage("");
+              setDigitCount("");
+              setHistory([]);
+            }} />
+          </div>
         ) : (
           <div className="game-start-section">
             <DigitInput
@@ -138,8 +141,6 @@ export default function App() {
             </div>
         </div>
       )}
-
-      {message && <p className="game-banner">{message}</p>}
 
     </div>
   );

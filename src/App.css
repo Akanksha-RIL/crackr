@@ -99,6 +99,7 @@
   flex: 1 1 auto;
   overflow-y: auto;
   padding: 10px;
+  margin-bottom: 200px;
   
   display: flex;
   flex-direction: column;
@@ -123,5 +124,9 @@
   .game-start-section, .game-check-section {
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .guess-history-container {
+    margin-bottom: 250px;
   }
 }
