@@ -84,7 +84,7 @@ export default function App() {
 
   return (
     <div className="game-container">
-      <TitleCard title={"Crackr"} subtitle={`Crack the mystery number!`} promptLabel={"Crack+Number"}/>
+      <TitleCard title={"Crack+Number"} subtitle={`Crack the mystery number!`} promptLabel={"Crackr"}/>
 
       {!gameStarted ? (
         gameRestart ? (
