@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+import "./App.css";
+
+import NumberCard from "./components/number-card";
+import DigitInput from "./components/digit-input";
+import GameButton from "./components/game-button";
+import TitleCard from "./components/title-card";
 
 export default function App() {
   const [digitCount, setDigitCount] = useState("");
@@ -7,6 +13,7 @@ export default function App() {
   const [message, setMessage] = useState("");
   const [history, setHistory] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
+  const [gameRestart, setGameRestart] = useState(false);
 
   const generateRandomNumber = (digits) => {
     let num = "";
@@ -27,7 +34,6 @@ export default function App() {
     setMessage("");
     setGameStarted(true);
     setGuess("");
-    console.log("Target number:", num); // For debugging
   };
 
   const checkGuess = () => {
@@ -68,72 +74,68 @@ export default function App() {
     setHistory((prev) => [...prev, entry]);
 
     if (guess === targetNumber) {
-      setMessage(`🎉 You got it right! The number was ${targetNumber}.`);
+      setMessage(`🎉 You got it right! The number was ${targetNumber}!`);
       setGameStarted(false);
-    } else {
-      setMessage(
-        `Digits correct: ${correctDigits}, Positions correct: ${correctPositions}`
-      );
+      setGameRestart(true);
     }
 
     setGuess("");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold mb-6">🔢 Number Guessing Game</h1>
+    <div className="game-container">
+      <TitleCard title={"Numdle"} subtitle={`It's Wordle… but for numbers!`} promptLabel={"A Number Guessing Game"}/>
 
       {!gameStarted ? (
-        <div className="flex flex-col items-center gap-3">
-          <input
-            type="number"
-            value={digitCount}
-            onChange={(e) => setDigitCount(e.target.value)}
-            placeholder="Enter number of digits"
-            className="border p-2 rounded w-48 text-center"
-          />
-          <button
-            onClick={startGame}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            Start Game
-          </button>
-        </div>
+        gameRestart ? (
+          <GameButton title="Play Again" onClick={() => {
+            setGameRestart(false);
+            setMessage("");
+            setDigitCount("");
+            setHistory([]);
+          }} />
+        ) : (
+          <div className="game-start-section">
+            <DigitInput
+              value={digitCount}
+              onChange={setDigitCount}
+              placeholder="Enter number of digits"
+            />
+            <GameButton title="Start Game" onClick={startGame} />
+          </div>
+        )
       ) : (
-        <div className="flex flex-col items-center gap-3">
-          <p className="text-gray-700">Guess the {digitCount}-digit number!</p>
-          <input
-            type="number"
-            value={guess}
-            onChange={(e) => setGuess(e.target.value)}
-            className="border p-2 rounded w-48 text-center"
-            placeholder="Enter your guess"
-          />
-          <button
-            onClick={checkGuess}
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-          >
-            Check Guess
-          </button>
+        <div className="game-section">
+          <div className="game-banner"><p>Guess the {digitCount}-digit number!</p></div>
+            <div className="game-check-section">
+            <DigitInput
+              value={guess}
+              onChange={setGuess}
+              placeholder="Enter your guess"
+              maxDigits={digitCount}
+            />
+            <GameButton title={"Check Guess"} onClick={checkGuess} />
+            </div>
         </div>
       )}
 
-      {message && <p className="mt-4 text-lg">{message}</p>}
+      {message && <p className="game-banner">{message}</p>}
 
       {history.length > 0 && (
-        <div className="mt-6 w-full max-w-md bg-white p-4 rounded shadow">
-          <h2 className="font-semibold mb-2 text-center">Previous Guesses</h2>
-          <ul className="space-y-1">
-            {history.map((h, i) => (
-              <li
-                key={i}
-                className="border-b border-gray-200 py-1 text-center text-gray-700"
-              >
-                {h.guess} → Digits: {h.correctDigits}, Positions:{" "}
-                {h.correctPositions}
-              </li>
-            ))}
-          </ul>
+        <div className="guess-history-container">
+          <h2 className="game-banner">Previous Guesses</h2>
+          {history.map((h, i) => (
+            <div
+              key={i}
+              style={{ margin: "10px" }}
+            >
+              <NumberCard
+                guessedNumber={h.guess}
+                digits={h.correctDigits}
+                positions={h.correctPositions}
+              />
+            </div>
+          ))}
         </div>
       )}
     </div>
