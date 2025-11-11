@@ -86,7 +86,7 @@ export default function App() {
     <div className="game-container">
       <div className="title-card-container"><TitleCard title={"Crack+Number"} subtitle={`Crack the mystery number!`} promptLabel={"Crackr"}/></div>
       
-      {history.length > 0 && (
+      {history.length > 0 ? (
         <div className="guess-history-container">
           <h2 className="game-banner">Previous Guesses</h2>
           {history.map((h, i) => (
@@ -102,6 +102,8 @@ export default function App() {
             </div>
           ))}
         </div>
+      ): (
+        <div style={{ flex: "1 1 auto" }}></div>
       )}
 
       {!gameStarted ? (
@@ -123,7 +125,7 @@ export default function App() {
               onEnter={startGame}
               placeholder="Enter number of digits"
             />
-            <GameButton title="Start Game" onClick={startGame} />
+            <GameButton title="Start" onClick={startGame} />
           </div>
         )
       ) : (
@@ -137,7 +139,7 @@ export default function App() {
               placeholder="Enter your guess"
               maxDigits={digitCount}
             />
-            <GameButton title={"Check Guess"} onClick={checkGuess} />
+            <GameButton title={"Check"} onClick={checkGuess} />
             </div>
         </div>
       )}

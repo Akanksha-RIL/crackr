@@ -78,7 +78,7 @@
 }
 
 .game-section {
-  position: fixed;
+  position: sticky;
   bottom: 0;
   flex: 0 0 auto;
   padding: 10px;
@@ -99,7 +99,6 @@
   flex: 1 1 auto;
   overflow-y: auto;
   padding: 10px;
-  margin-bottom: 200px;
   
   display: flex;
   flex-direction: column;
@@ -119,14 +118,14 @@
   .game-container {
     padding: 1rem;
     gap: 0rem;
+    height: 96vh;
   }
 
   .game-start-section, .game-check-section {
-    flex-direction: column;
     gap: 0.5rem;
   }
 
-  .guess-history-container {
-    margin-bottom: 250px;
+  .game-banner {
+    padding: 0px 10px;
   }
 }
