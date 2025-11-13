@@ -74,7 +74,7 @@ export default function App() {
     setHistory((prev) => [entry, ...prev]);
 
     if (guess === targetNumber) {
-      setMessage(`🎉 You got it right! The number was ${targetNumber}!`);
+      setMessage(`🎉 You got it right! \n The number was ${targetNumber}!`);
       setGameStarted(false);
       setGameRestart(true);
     }
@@ -109,7 +109,7 @@ export default function App() {
       {!gameStarted ? (
         gameRestart ? (
           <div className="game-section">
-            <p className="game-banner">{message}</p>
+            <div className="game-banner" style={{whiteSpace: "pre-line"}}><p>{message}</p></div>
             <GameButton title="Play Again" onClick={() => {
               setGameRestart(false);
               setMessage("");
